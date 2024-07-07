@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><style type="text/css">/* Peach and Navy Blue Theme */
+body {
+  --background-color: #f0d8c8;
+  --button-color: #d0b8a8;
+  --button-text-color: #003366;
+  --display-color: #d0b8a8;
+  --display-text-color: #003366;
+  --shadow-color: rgba(0, 51, 102, 0.3);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.calculator {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px var(--shadow-color), -10px -10px 20px var(--shadow-color);
+  padding: 20px;
+}
+
+.display {
+  background-color: var(--display-color);
+  border-radius: 5px;
+  box-shadow: inset 5px 5px 10px var(--shadow-color), inset -5px -5px 10px var(--shadow-color);
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.display input {
+  background-color: transparent;
+  border: none;
+  color: var(--display-text-color);
+  font-size: 24px;
+  text-align: right;
+  width: 100%;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+.btn {
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  box-shadow: 2px 2px 5px var(--shadow-color), -2px -2px 5px var(--shadow-color);
+}
+
+#clear {
+  grid-column: 1 / span 2;
+}</style>
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neumorphic Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <input type="text" id="result" readonly="">
+    </div>
+    <div class="buttons">
+      <button class="btn" data-value="7">7</button>
+      <button class="btn" data-value="8">8</button>
+      <button class="btn" data-value="9">9</button>
+      <button class="btn" data-value="/">/</button>
+      <button class="btn" data-value="4">4</button>
+      <button class="btn" data-value="5">5</button>
+      <button class="btn" data-value="6">6</button>
+      <button class="btn" data-value="*">*</button>
+      <button class="btn" data-value="1">1</button>
+      <button class="btn" data-value="2">2</button>
+      <button class="btn" data-value="3">3</button>
+      <button class="btn" data-value="-">-</button>
+      <button class="btn" data-value="0">0</button>
+      <button class="btn" data-value=".">.</button>
+      <button class="btn" data-value="=">=</button>
+      <button class="btn" data-value="+">+</button>
+      <button class="btn" id="clear">C</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+
+<script>const buttons = document.querySelectorAll('.btn');
+const resultInput = document.getElementById('result');
+const clearButton = document.getElementById('clear');
+
+let currentValue = '';
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.dataset.value;
+    if (value === '=') {
+      try {
+        currentValue = eval(currentValue);
+        resultInput.value = currentValue;
+      } catch (error) {
+        resultInput.value = 'Error';
+      }
+    } else if (value === 'C') {
+      currentValue = '';
+      resultInput.value = '';
+    } else {
+      currentValue += value;
+      resultInput.value = currentValue;
+    }
+  });
+});
+
+clearButton.addEventListener('click', () => {
+  currentValue = '';
+  resultInput.value = '';
+});</script></body>
